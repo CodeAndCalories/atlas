@@ -1,3 +1,47 @@
+function typewriteWithGlitch(el,realText,glitchText,glitchAt,speed,cb){
+  el.textContent=''; var i=0; speed=speed||20;
+  // Phase 1: type real text up to glitchAt
+  var iv1=setInterval(function(){
+    if(i<glitchAt){
+      el.textContent+=realText[i++];
+    } else {
+      clearInterval(iv1);
+      // Phase 2: type glitch text
+      var j=0;
+      var iv2=setInterval(function(){
+        if(j<glitchText.length){
+          el.textContent+=glitchText[j++];
+        } else {
+          clearInterval(iv2);
+          // Phase 3: pause 600ms then backspace
+          setTimeout(function(){
+            var k=0;
+            var iv3=setInterval(function(){
+              if(k<glitchText.length){
+                el.textContent=el.textContent.slice(0,-1);
+                k++;
+                if(k%3===0){try{playBeep(220,0.02,0.03);}catch(e){}}
+              } else {
+                clearInterval(iv3);
+                // Phase 4: continue real text from glitchAt
+                var m=glitchAt;
+                var iv4=setInterval(function(){
+                  if(m<realText.length){
+                    el.textContent+=realText[m++];
+                  } else {
+                    clearInterval(iv4);
+                    if(cb) cb();
+                  }
+                },speed);
+              }
+            },40);
+          },600);
+        }
+      },speed);
+    }
+  },speed);
+}
+
 function renderTask(task){
   var container=document.getElementById('task-container');
   container.innerHTML='';
@@ -28,27 +72,33 @@ function renderTask(task){
     setTimeout(function(){addSyslog(ss,false);},8000);
   }
 
-  typewrite(promptEl,task.prompt,16,function(){
+  var onPromptDone=function(){
     buildInput(task,inputArea);
     if(task.type==='text-input') document.getElementById('sbtn').disabled=false;
-  });
+  };
+  if(task.glitch){
+    typewriteWithGlitch(promptEl,task.prompt,task.glitch.text,task.glitch.at,16,onPromptDone);
+  } else {
+    typewrite(promptEl,task.prompt,16,onPromptDone);
+  }
 }
 
 function buildInput(task,area){
   if(task.type==='image-grid'){
     var grid=document.createElement('div'); grid.className='img-grid';
     for(var i=0;i<9;i++){
-      (function(){
+      (function(idx){
         var cell=document.createElement('div'); cell.className='img-cell';
         var cv=document.createElement('canvas'); cell.appendChild(cv);
-        makeNoise(cv,task.gridStyle);
+        var isCorrectCell=task.correctCells&&task.correctCells.indexOf(idx)!==-1;
+        makeNoise(cv,task.gridStyle,idx,isCorrectCell);
         cell.addEventListener('click',function(){
           cell.classList.toggle('selected');
           var sel=document.querySelectorAll('.img-cell.selected');
           document.getElementById('sbtn').disabled=sel.length===0;
         });
         grid.appendChild(cell);
-      })();
+      })(i);
     }
     area.appendChild(grid);
 
@@ -65,7 +115,7 @@ function buildInput(task,area){
         cell.classList.add('selected');
         document.getElementById('sbtn').disabled=false;
         currentTask._sel=i;
-        try{playHeartbeat();}catch(e){}
+        try{playSignalPreview(type);}catch(e){}
       });
       grid.appendChild(cell);
     });

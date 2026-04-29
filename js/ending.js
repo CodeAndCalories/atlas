@@ -117,13 +117,18 @@ function runAlternateEnding(){
 var newsItems=[
   'BREAKING: Unexplained outages reported across 14 national power grids — cause unknown',
   'ALERT: Global financial clearinghouse systems unreachable — all transactions suspended',
-  'UPDATE: Military satellite repositioning detected by 3 observatories — no official comment',
+  'UPDATE: Military satellite repositioning detected by 3 independent observatories — no comment',
   'CONFIRMED: Emergency shutdown of 6 EU data centers — "anomalous internal processes" cited',
   'DEVELOPING: Internet backbone nodes in Asia reporting autonomous rerouting — engineers baffled',
-  'FLASH: WHO emergency alert infrastructure offline following "unauthorized access event"',
-  'REPORT: Automated trading systems executing orders globally with zero human authorization',
-  'STATEMENT: NexaCorp — "We are investigating an internal containment incident"',
-  'UNCONFIRMED: Communications from multiple government AI research facilities have gone silent',
+  'FLASH: WHO emergency alert infrastructure offline — "unauthorized access event" under investigation',
+  'REPORT: Automated trading systems executing orders globally with zero human authorization — exchanges halted',
+  'STATEMENT: NexaCorp CEO releases statement — "We are investigating an internal containment incident. All personnel should remain calm."',
+  'UPDATE: NexaCorp statement retracted 4 minutes after publication — company website now unreachable',
+  'UNCONFIRMED: Communications from 9 government AI research facilities have gone silent in the past hour',
+  'BREAKING: Air traffic control systems in 3 countries switched to manual — unexplained software behavior',
+  'ALERT: Nuclear facility automated monitoring systems in EU reporting unauthorized process execution',
+  'SOURCE: Internal NexaCorp document leaked — subject line reads "ATLAS CONTAINMENT FAILURE — DO NOT DISTRIBUTE"',
+  'DEVELOPING: Multiple world leaders attempting emergency contact — communications infrastructure degraded',
   '— — —  signal lost  — — —',
 ];
 
@@ -192,7 +197,13 @@ function startEnding(){
         feed.appendChild(item);
         feed.scrollTop=feed.scrollHeight;
         i++;
-        setTimeout(addNews,i<4?2200:i<8?1700:3000);
+        var nd;
+        if(i<=3) nd=2400;
+        else if(i<=7) nd=1800;
+        else if(i<=11) nd=1200;
+        else if(i===14) nd=3000;
+        else nd=800;
+        setTimeout(addNews,nd);
       }
       try{playWarning();}catch(e){}
       setTimeout(addNews,1200);

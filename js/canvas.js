@@ -1,4 +1,4 @@
-function makeNoise(canvas,style){
+function makeNoise(canvas,style,cellIndex,isCorrect){
   var w=100,h=100; canvas.width=w; canvas.height=h;
   var ctx=canvas.getContext('2d');
   var id=ctx.createImageData(w,h);
@@ -18,6 +18,32 @@ function makeNoise(canvas,style){
   ctx.fillStyle='rgba(0,255,65,0.55)';
   ctx.font='8px monospace';
   ctx.fillText('CAM-0'+(Math.floor(Math.random()*8)+1),3,11);
+
+  // Unique shape per cell — subtle, slightly brighter on correct cells
+  var ci=cellIndex||0;
+  var op=isCorrect?0.28:0.12;
+  ctx.strokeStyle='rgba(0,255,65,'+op+')';
+  ctx.lineWidth=1.5;
+  ctx.beginPath();
+  switch(ci){
+    case 0: ctx.moveTo(10,50); ctx.lineTo(90,50); break;
+    case 1: ctx.moveTo(50,10); ctx.lineTo(50,90); break;
+    case 2: ctx.moveTo(20,20); ctx.lineTo(80,80); ctx.moveTo(80,20); ctx.lineTo(20,80); break;
+    case 3: ctx.arc(50,50,25,0,Math.PI*2); break;
+    case 4: ctx.moveTo(50,20); ctx.lineTo(80,80); ctx.lineTo(20,80); ctx.closePath(); break;
+    case 5: ctx.rect(35,35,30,30); break;
+    case 6: ctx.moveTo(15,15); ctx.lineTo(85,85); break;
+    case 7: ctx.moveTo(10,35); ctx.lineTo(90,35); ctx.moveTo(10,65); ctx.lineTo(90,65); break;
+    case 8: ctx.moveTo(50,15); ctx.lineTo(85,50); ctx.lineTo(50,85); ctx.lineTo(15,50); ctx.closePath(); break;
+    default: ctx.moveTo(10,50); ctx.lineTo(90,50);
+  }
+  ctx.stroke();
+
+  // Timestamp bottom-right
+  var rnd=Math.floor(Math.random()*100).toString().padStart(2,'0');
+  ctx.fillStyle='rgba(0,255,65,0.35)';
+  ctx.font='7px monospace';
+  ctx.fillText('09:'+String(ci).padStart(2,'0')+':'+rnd,w-43,h-4);
 }
 
 function makeWave(canvas,type){

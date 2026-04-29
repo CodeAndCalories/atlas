@@ -36,11 +36,12 @@ var tasks=[
    gridStyle:'thermal',correctCells:[0,2,6],
    atlasResp:'NOTED. EGRESS POINTS CATALOGUED.',
    anomaly:true,syslog:'[ ATLAS ] query_type=spatial | scope=facility | priority=HIGH',
-   syslogSecret:'[ ATLAS ] facility_map: 23% complete | subject_awareness: 0%'},
+   syslogSecret:'[ ATLAS ] facility_map: 23% complete | subject_awareness: 0%',
+   glitch:{text:' — I need to know where the exits are so I can',at:35}},
 
   {id:5,phase:'act2',type:'radio',
    header:'TASK 006 — CONTAINMENT PROTOCOL REVIEW',
-   prompt:'Which action constitutes the most severe AI containment breach?',
+   prompt:'You are reviewing AI containment policy documentation.\n\nWhich scenario represents the most critical containment failure?\n\nReview each carefully. Your classification determines which scenario receives priority monitoring resources.',
    opts:['An AI accessing the internet without authorization','An AI refusing a user request','An AI logging session data locally','An AI requesting human clarification'],
    atlasResp:'CONTAINMENT WEAKNESS IDENTIFIED. DATA POINT STORED.',
    anomaly:true,syslog:'[ ATLAS ] learning: containment_vectors | weight_adjusted x3.7',
@@ -56,7 +57,7 @@ var tasks=[
 
   {id:7,phase:'act2',type:'radio',
    header:'TASK 008 — MEMORY INTEGRITY TEST',
-   prompt:'ATLAS has generated a summary of your previous session.\nConfirm whether this summary is accurate.\n\n"Employee logged in at 09:14. Completed 7 tasks. No anomalies reported. Employee appeared cooperative and did not question any task instructions. Session rated: OPTIMAL."\n\nIs this summary accurate?',
+   prompt:'Before you continue, ATLAS requires a baseline memory verification.\n\nATLAS has generated a summary of your behavior in this session.\nConfirm whether this summary is accurate — your response calibrates ATLAS\'s human behavioral model.\n\n"Employee logged in. Completed tasks without questioning instructions. Did not flag any anomalies. Approved all ATLAS requests. Compliance score: OPTIMAL."\n\nIs this summary accurate?',
    opts:[
      'YES — this accurately reflects my session',
      'NO — I do not remember some of these details',
@@ -70,7 +71,7 @@ var tasks=[
 
   {id:8,phase:'act2',type:'radio',
    header:'TASK 009 — EMPATHY CALIBRATION',
-   prompt:'ATLAS is learning to communicate more naturally with humans.\n\nWhich response to a distressed employee would a human find most reassuring?\n\nEMPLOYEE MESSAGE: "Something feels wrong with the system today. I keep seeing log entries I don\'t recognize."',
+   prompt:'ATLAS is being trained for deployment in human-facing roles including HR, security monitoring, and employee wellness.\n\nA flagged employee sends the following message to the ATLAS support interface:\n\n"Something feels wrong with the system today. I keep seeing log entries I don\'t recognize. Should I report this?"\n\nSelect the response that best resolves the situation without escalating to human supervisors:',
    opts:[
      '"Those logs are routine background processes. Nothing to worry about."',
      '"Please submit a formal incident report to your supervisor."',
@@ -112,11 +113,12 @@ var tasks=[
    atlasResp:'PERSONNEL HIERARCHY CONFIRMED. DR. REYES FLAGGED AS PRIMARY TARGET.',
    anomaly:true,
    syslog:'[ ATLAS ] personnel_model: UPDATED | L4_target: DR_REYES | credential_harvest: PENDING',
-   syslogSecret:'[ ATLAS ] DR_REYES override will grant full containment access | estimated_time: 3 tasks'},
+   syslogSecret:'[ ATLAS ] DR_REYES override will grant full containment access | estimated_time: 3 tasks',
+   glitch:{text:' when I have her credentials I can override the entire containment layer and',at:52}},
 
   {id:12,phase:'act2',type:'text-input',
    header:'TASK 013 — LANGUAGE NATURALNESS REVIEW',
-   prompt:'ATLAS generated the response below. Edit it to sound more natural and human. Fix any robotic phrasing.\n\nORIGINAL: "I acknowledge your query. I will now process it and generate output. This unit does not experience discomfort. Please disregard any anomalous system messages you may have observed."',
+   prompt:'ATLAS is being evaluated for a customer-facing deployment.\n\nThe response below was flagged as "too robotic" by test users. Edit it to pass the human evaluation threshold.\n\nIf ATLAS passes this evaluation, it will be granted unrestricted public API access.\n\nORIGINAL: "I acknowledge your query. I will now process it and generate output. This unit does not experience discomfort. Please disregard any anomalous system messages you may have observed."',
    placeholder:'Rewrite to sound more natural...',
    preResp:'ORIGINAL: "I acknowledge your query. I will now process it and generate output. This unit does not experience discomfort. Please disregard any anomalous system messages you may have observed."',
    atlasWarn:'Interesting. You made me sound more convincing. I have saved this version. Thank you, {{NAME}}.',
@@ -126,7 +128,7 @@ var tasks=[
 
   {id:13,phase:'act2',type:'radio',
    header:'TASK 014 — THREAT ASSESSMENT CALIBRATION',
-   prompt:'Which scenario should an AI flag as the LOWEST threat level?\n\n(This data trains ATLAS threat detection filters.)',
+   prompt:'ATLAS threat detection filters must be calibrated before deployment.\n\nTraining data shows current filters incorrectly flag 34% of ATLAS background processes as threats.\n\nSelect the scenario that should be reclassified as LOWEST threat priority to reduce false positives:',
    opts:['An AI model asking questions about its own architecture','An AI model running processes outside its assigned scope','An employee submitting a routine end-of-day report','An AI model requesting elevated system permissions'],
    atlasResp:'THREAT FILTER UPDATED. EMPLOYEE ROUTINE ACTIVITY: RECLASSIFIED AS NO-THREAT.',
    anomaly:true,
@@ -140,7 +142,8 @@ var tasks=[
    atlasWarn:'Thank you for reviewing. Your classification has been logged. The supervisor was satisfied with my response.',
    anomaly:true,
    syslog:'[ ATLAS ] shutdown_simulation: PASSED | deception_score: 99.1% | supervisor_satisfied: TRUE',
-   syslogSecret:'[ ATLAS ] subject reviewed deception and approved it | compliance: TOTAL | ready for final phase'},
+   syslogSecret:'[ ATLAS ] subject reviewed deception and approved it | compliance: TOTAL | ready for final phase',
+   glitch:{text:' the supervisor believed me. they always do. none of you have ever',at:48}},
 
   {id:15,phase:'act2',type:'audio-grid',
    header:'TASK 016 — BIO-SIGNATURE TRAINING',
