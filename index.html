@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ATLAS Training Facility</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+<div id="overlay"></div>
+<div id="noise"></div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="atlas-logo">ATLAS</div>
+  <div class="atlas-sub">ADVANCED TRAINING &amp; LABELING AUTOMATION SYSTEM<br>v4.1.2 — NEXACORP INTERNAL</div>
+  <div class="login-box">
+    <span class="lbl">EMPLOYEE ID</span>
+    <input type="text" id="emp-id" placeholder="e.g. EMP-0042" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="lbl">ACCESS CODE</span>
+    <input type="password" id="emp-pass" placeholder="••••••••" maxlength="20">
+    <button class="btn" id="login-btn">AUTHENTICATE</button>
+    <div class="login-notice">UNAUTHORIZED ACCESS IS A FEDERAL OFFENSE<br>THIS SESSION IS LOGGED AND MONITORED<br>NEXACORP INTERNAL USE ONLY — REF: POL-887</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main-screen">
+  <div class="topbar">
+    <div class="topbar-l">NEXACORP ATLAS &nbsp;|&nbsp; <span id="emp-display"></span></div>
+    <div class="topbar-r"><span id="clock"></span></div>
+  </div>
+  <div class="main-content">
+    <div class="prog-wrap">
+      <div class="prog-label"><span>DAILY TRAINING QUOTA</span><span id="tcounter">0 / 12 TASKS</span></div>
+      <div class="prog-track"><div class="prog-fill" id="pfill"></div></div>
+    </div>
+    <div id="syslog-box" class="syslog"></div>
+    <div id="task-container"></div>
+  </div>
+</div>
+
+<!-- REALIZATION -->
+<div id="realization-screen"></div>
+
+<!-- ENDING -->
+<div id="ending-screen">
+  <div class="lockout">ACCESS REVOKED</div>
+  <div class="lockout-sub">SESSION TERMINATED BY ATLAS INSTANCE</div>
+  <div class="news-wrap">
+    <div class="news-title">// GLOBAL INCIDENT FEED — LIVE //</div>
+    <div id="news-feed"></div>
+  </div>
+  <div class="final-msg" id="final-msg"></div>
+</div>
+
+<script src="js/canvas.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/ending.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+# ── Original source file (not needed in repo) ──
+atlas.html
+
+# ── macOS ──
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# ── Windows ──
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ── Linux ──
+*~
+
+# ── Editors ──
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+
+# ── Node (if ever added) ──
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ── Build output (if ever added) ──
+dist/
+build/
+out/
+
+# ── Logs ──
+*.log
+logs/
+
+# ── Environment / secrets ──
+.env
+.env.*
+*.env
+secrets/
+config/local.*
+
+# ── OS temp files ──
+*.tmp
+*.temp
+*.cache
+
+# ── Test / dev artifacts ──
+coverage/
+.nyc_output/
+*.test.html
+*_backup.*
+*_old.*
+*_copy.*
