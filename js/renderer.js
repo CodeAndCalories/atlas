@@ -23,6 +23,10 @@ function renderTask(task){
     var lt=task.syslog.replace('{{NAME}}',empName);
     setTimeout(function(){addSyslog(lt,task.phase==='act3');},400);
   }
+  if(task.syslogSecret){
+    var ss=task.syslogSecret;
+    setTimeout(function(){addSyslog(ss,false);},8000);
+  }
 
   typewrite(promptEl,task.prompt,16,function(){
     buildInput(task,inputArea);
@@ -113,6 +117,10 @@ function submitTask(){
 
   function proceed(){
     tasksDone++; updateProgress();
+    if(task.isRealization && task._sel===1){
+      startAlternateEnding();
+      return;
+    }
     var delay=task.isRealization?4000:1800;
     setTimeout(function(){
       var c=document.getElementById('task-container');

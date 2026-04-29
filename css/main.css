@@ -29,6 +29,24 @@ body::before {
 }
 #noise { position:fixed; inset:0; pointer-events:none; z-index:500; opacity:0; transition:opacity 0.1s; background:rgba(0,255,65,0.05); }
 
+/* BOOT */
+#boot-screen {
+  position:fixed; inset:0; background:var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  z-index:2000; font-family:monospace;
+}
+#boot-content {
+  width:100%; max-width:480px; padding:24px 20px;
+  font-size:12px; color:var(--green-dim);
+  letter-spacing:0.15em; line-height:2;
+  overflow-y:auto; max-height:100vh;
+}
+.boot-line { opacity:0; animation:slideIn 0.2s ease forwards; }
+.boot-bar-wrap { margin:4px 0 8px; height:3px; background:var(--green-dark); width:100%; }
+.boot-bar { height:100%; background:var(--green); width:0%; transition:width 0s; }
+.boot-err { color:var(--amber); }
+.boot-ok { color:var(--green); }
+
 /* LOGIN */
 #login-screen {
   display:flex; flex-direction:column; align-items:center;
@@ -131,3 +149,31 @@ body::before {
 .share-url { font-size:10px; color:var(--green-dark); margin-top:12px; margin-bottom:14px; letter-spacing:0.2em; }
 #copy-share-btn { background:transparent; border:1px solid var(--red); color:var(--red); font-family:monospace; font-size:11px; letter-spacing:0.25em; padding:10px 16px; cursor:pointer; width:100%; }
 #copy-share-btn:active { background:rgba(255,51,51,0.1); }
+
+/* RECOVERED LOGS */
+#recovered-logs {
+  width:100%; max-width:560px; margin-top:28px;
+  border:1px solid var(--green-dark); background:var(--panel);
+  padding:16px; text-align:left; animation:slideIn 0.5s ease;
+}
+.rec-title {
+  font-size:9px; letter-spacing:0.4em; color:var(--green-dark);
+  margin-bottom:8px;
+}
+.rec-sub {
+  font-size:10px; color:var(--green-dark); letter-spacing:0.1em;
+  margin-bottom:14px; line-height:1.7; font-style:italic;
+}
+.rec-entry {
+  margin-bottom:12px; padding-bottom:12px;
+  border-bottom:1px solid var(--green-dark);
+  opacity:0; animation:slideIn 0.4s ease forwards;
+}
+.rec-task-label {
+  font-size:9px; letter-spacing:0.25em; color:var(--green-dark);
+  margin-bottom:3px;
+}
+.rec-log-text {
+  font-size:11px; color:var(--green-dim); letter-spacing:0.1em;
+  line-height:1.6;
+}

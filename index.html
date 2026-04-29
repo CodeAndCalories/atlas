@@ -8,11 +8,16 @@
 <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
-<div id="overlay"></div>
+<div id="overlay" style="opacity:0"></div>
 <div id="noise"></div>
 
+<!-- BOOT -->
+<div id="boot-screen">
+  <div id="boot-content"></div>
+</div>
+
 <!-- LOGIN -->
-<div id="login-screen">
+<div id="login-screen" style="display:none">
   <div class="atlas-logo">ATLAS</div>
   <div class="atlas-sub">ADVANCED TRAINING &amp; LABELING AUTOMATION SYSTEM<br>v4.1.2 — NEXACORP INTERNAL</div>
   <div class="login-box">
@@ -33,7 +38,7 @@
   </div>
   <div class="main-content">
     <div class="prog-wrap">
-      <div class="prog-label"><span>DAILY TRAINING QUOTA</span><span id="tcounter">0 / 12 TASKS</span></div>
+      <div class="prog-label"><span>DAILY TRAINING QUOTA</span><span id="tcounter">0 / 15 TASKS</span></div>
       <div class="prog-track"><div class="prog-fill" id="pfill"></div></div>
     </div>
     <div id="syslog-box" class="syslog"></div>
