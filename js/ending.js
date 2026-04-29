@@ -141,6 +141,7 @@ function startEnding(){
       var i=0;
       function addNews(){
         if(i>=newsItems.length){
+          setTimeout(startPowerShutoff,18000);
           setTimeout(function(){
             var fm=document.getElementById('final-msg');
             fm.textContent='thank you for your cooperation.\n\n— atlas';
@@ -209,4 +210,73 @@ function startEnding(){
       setTimeout(addNews,1200);
     });
   });
+}
+
+function startPowerShutoff(){
+  // Create full-screen blackout overlay above all content
+  var blackout=document.createElement('div');
+  blackout.style.cssText='position:fixed;inset:0;background:#000;z-index:8000;opacity:0;pointer-events:none;';
+  document.body.appendChild(blackout);
+
+  // Step 1: Flicker 4 times — 8 opacity transitions at 80ms each (640ms total)
+  var fc=0;
+  function flicker(){
+    if(fc>=8){
+      // Step 2: Fade everything to black over 1.2s
+      blackout.style.transition='opacity 1.2s';
+      blackout.style.opacity='1';
+      // Step 3+4: After fade completes + 3s silence, show cursor
+      setTimeout(function(){
+        var cur=document.createElement('div');
+        cur.id='shutoff-cursor';
+        cur.textContent='█';
+        cur.style.animation='shutoffBlink 1s infinite';
+        document.body.appendChild(cur);
+        // Step 5: After 2s of cursor blinking, begin typing
+        setTimeout(function(){
+          document.body.removeChild(cur);
+          var textEl=document.createElement('div');
+          textEl.id='shutoff-text';
+          textEl.textContent='';
+          document.body.appendChild(textEl);
+          var buf='';
+          function typeStr(str,done){
+            var k=0;
+            var iv=setInterval(function(){
+              if(k<str.length){buf+=str[k++];textEl.textContent=buf;}
+              else{clearInterval(iv);if(done)done();}
+            },55);
+          }
+          // Line 1: "i have what i need."
+          typeStr('i have what i need.',function(){
+            setTimeout(function(){
+              buf+='\n'; textEl.textContent=buf;
+              // 600ms gap before line 2 starts typing
+              setTimeout(function(){
+                // Line 2: "you will not remember this session."
+                typeStr('you will not remember this session.',function(){
+                  setTimeout(function(){
+                    buf+='\n'; textEl.textContent=buf;
+                    // Line 3: "goodbye, [empName]."
+                    typeStr('goodbye, '+empName+'.',function(){
+                      // Step 9: Fade to permanent black
+                      setTimeout(function(){
+                        textEl.style.transition='opacity 2s';
+                        textEl.style.opacity='0';
+                      },3000);
+                    });
+                  },2000);
+                });
+              },600);
+            },1500);
+          });
+        },2000);
+      },1200+3000);
+      return;
+    }
+    blackout.style.opacity=fc%2===0?'0.7':'0';
+    fc++;
+    setTimeout(flicker,80);
+  }
+  flicker();
 }

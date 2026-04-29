@@ -177,3 +177,83 @@ body::before {
   font-size:11px; color:var(--green-dim); letter-spacing:0.1em;
   line-height:1.6;
 }
+
+/* SHUTOFF SCREEN */
+#shutoff-cursor {
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:monospace;
+  font-size:18px;
+  color:rgba(0,255,65,0.4);
+  z-index:9000;
+}
+#shutoff-text {
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:monospace;
+  font-size:14px;
+  color:rgba(0,255,65,0.5);
+  z-index:9000;
+  text-align:center;
+  letter-spacing:0.15em;
+  line-height:2.2;
+  white-space:pre;
+  width:90%;
+  max-width:400px;
+}
+
+/* ══════════════════════════════
+   MOBILE STYLES — max-width 480px
+   ══════════════════════════════ */
+@media (max-width: 480px) {
+  body { -webkit-text-size-adjust:100%; }
+
+  /* Boot */
+  #boot-content { padding:16px 14px; font-size:11px; letter-spacing:0.1em; }
+
+  /* Login */
+  .atlas-logo { font-size:clamp(40px,12vw,88px); }
+  .atlas-sub { font-size:9px; letter-spacing:0.15em; }
+  .login-box { padding:20px 16px; }
+
+  /* Topbar */
+  .topbar-l { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:65%; }
+
+  /* Progress bar */
+  .prog-label { font-size:8px; letter-spacing:0.1em; }
+
+  /* Syslog */
+  .syslog { font-size:9px; max-height:180px; overflow-y:auto; word-break:break-all; }
+
+  /* Task prompt */
+  .task-prompt { overflow-wrap:break-word; }
+
+  /* Image grid — keep 3 cols, ensure touch targets */
+  .img-cell { min-height:80px; }
+  .img-cell canvas { width:100%; height:100%; display:block; }
+
+  /* Audio grid — 2 columns on mobile */
+  .audio-grid { grid-template-columns:repeat(2,1fr); }
+  .audio-cell { min-height:80px; }
+
+  /* Radio options */
+  .radio-opt { padding:14px 12px; line-height:1.6; }
+
+  /* Inputs — prevent iOS zoom on focus */
+  .login-box input, .task-input { font-size:16px; }
+
+  /* Ending */
+  .lockout { font-size:clamp(26px,7vw,58px); }
+  .news-wrap { padding:12px; }
+  .news-item { font-size:11px; }
+
+  /* Share card */
+  #share-card { padding:14px; }
+  .share-title { font-size:12px; }
+
+  /* Recovered logs */
+  .rec-log-text { font-size:10px; }
+  .rec-entry { padding-bottom:10px; }
+}
